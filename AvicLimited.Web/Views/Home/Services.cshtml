@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Services";
+}
+
+<main id="main">
+    <!-- ======= Why Us Section ======= -->
+    <section class="services" id="services">
+        <br /> <br /> <br />
+        <div class="container">
+            <div class="section-title">
+                <h2>Services</h2>
+                <p>We offer a lot, we offer value for money.</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 d-flex align-items-stretch">
+                    <div class="content">
+                        <h3>Why Avic Limited?</h3>
+                        <p>
+                            We take pride in what we do. Our priority is you, our client, and we rely on the good services with deliver to you that will lead to referral as a major way of increasing our clientele.
+                            We strive to strive to give our customers the best with disappointment.
+                        </p>
+                        <div class="text-center">
+                            <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="icon-boxes d-flex flex-column justify-content-center">
+                        <div class="row">
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>Timely Delivery</h4>
+                                    <p>We know how important your construction project can be, for this reaso we deliver on time. No stories.</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-cube-alt"></i>
+                                    <h4>Neat & State of the Art Delivery</h4>
+                                    <p>We deliver only the best design, for the right price and the right price to our clients.</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="bx bx-hard-hat"></i>
+                                    <h4>Maintenance & Check up</h4>
+                                    <p>We don't just ship the solution, we keep contact with our clients to ensure they are satified with our delivery.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End .content-->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Why Us Section -->
+    <!-- ======= Appointment Section ======= -->
+    <section id="appointment" class="appointment section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Request a quote</h2>
+                <p>
+                    Would you like to know what your next project will cost you and how it can be achieved,
+                    request a quote and we will get back to you soonest.
+                </p>
+            </div>
+
+            <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+                <div class="form-row">
+                    <div class="col-md-4 form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                        <div class="validate"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 form-group">
+                        <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <select name="department" id="department" class="form-control">
+                            <option value="">Select Project Type</option>
+                            <option value="Department 1">Department 1</option>
+                            <option value="Department 2">Department 2</option>
+                            <option value="Department 3">Department 3</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <input type="text" name="name" class="form-control" id="budget" placeholder="Budget " data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                        <div class="validate"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+                    <div class="validate"></div>
+                </div>
+                <div class="mb-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+                </div>
+                <div class="text-center"><button type="submit">Submit Quote</button></div>
+            </form>
+
+        </div>
+    </section><!-- End Appointment Section -->
+
+</main>

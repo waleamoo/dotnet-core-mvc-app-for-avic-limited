@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="card card-login col-md-6 mx-auto mt-5">
+        
+        <div class="card-body">
+
+            <h3 class="mb-2">Admin Login</h3>
+
+            <form method="POST" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Email address">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me">
+                            Remember Password
+                        </label>
+                    </div>
+                </div>
+
+                <div class="formResult"></div>
+
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <br>
+
+            <div class="text-center">
+                <a class="d-block small" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+</div>
