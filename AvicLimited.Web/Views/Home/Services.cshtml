@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IList<CategoryListVM>
+
+@{
     ViewData["Title"] = "Services";
 }
 
@@ -13,47 +15,31 @@
             </div>
 
             <div class="row">
+                <h2>We offer the following:</h2>
 
-                <div class="col-lg-4 d-flex align-items-stretch">
-                    <div class="content">
-                        <h3>Why Avic Limited?</h3>
-                        <p>
-                            We take pride in what we do. Our priority is you, our client, and we rely on the good services with deliver to you that will lead to referral as a major way of increasing our clientele.
-                            We strive to strive to give our customers the best with disappointment.
-                        </p>
-                        <div class="text-center">
-                            <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-12 mb-4 d-flex align-items-stretch">
+                        <div class="content">
+                            <h3>@item.CategoryName</h3>
+                            <p>
+                                @item.CategoryDescription
+                            </p>
+                            @if (item.Subcategories.Any())
+                            {
+                                <p>We offer the following services under @item.CategoryName</p>
+                                <ul>
+                                    @foreach (var sub in item.Subcategories)
+                                    {
+                                        <li>@sub.SubcategoryName</li>
+                                    }
+                                </ul>
+                            }
                         </div>
                     </div>
-                </div>
+                }
                 
-                <div class="col-lg-8 d-flex align-items-stretch">
-                    <div class="icon-boxes d-flex flex-column justify-content-center">
-                        <div class="row">
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-receipt"></i>
-                                    <h4>Timely Delivery</h4>
-                                    <p>We know how important your construction project can be, for this reaso we deliver on time. No stories.</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-cube-alt"></i>
-                                    <h4>Neat & State of the Art Delivery</h4>
-                                    <p>We deliver only the best design, for the right price and the right price to our clients.</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-hard-hat"></i>
-                                    <h4>Maintenance & Check up</h4>
-                                    <p>We don't just ship the solution, we keep contact with our clients to ensure they are satified with our delivery.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End .content-->
-                </div>
+                
             </div>
 
         </div>

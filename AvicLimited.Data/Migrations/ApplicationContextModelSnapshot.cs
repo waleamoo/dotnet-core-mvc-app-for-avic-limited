@@ -192,9 +192,6 @@ namespace AvicLimited.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArtisanId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -214,7 +211,7 @@ namespace AvicLimited.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtisanId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategories");
                 });
@@ -356,7 +353,7 @@ namespace AvicLimited.Data.Migrations
                 {
                     b.HasOne("AvicLimited.Data.Models.Category", "Category")
                         .WithMany("SubCategories")
-                        .HasForeignKey("ArtisanId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

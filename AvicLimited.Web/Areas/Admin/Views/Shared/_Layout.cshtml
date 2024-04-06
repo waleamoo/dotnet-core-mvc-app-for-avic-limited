@@ -90,13 +90,16 @@
             input.value = input.value.replace(regex, "");
         }
     </script>
-
+    <script src="~/assets/vendor/ckeditor/ckeditor.js"></script>
     <script>
-        //CKEDITOR.replace('editor');
+        $(function () {
+            CKEDITOR.replace('CategoryDescription', {
+                filebrowserUploadUrl: "/home/uploadimage",
+                //filebrowserUploadMethod: "form",
+                filebrowserBrowseUrl: "/home/uploadexplorer"
+            });
+        })
     </script>
-
-    
-
 </body>
 
 </html>

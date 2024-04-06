@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Category>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        @if (item.SubCategories.Any())
+        {
+            <li class="drop-down">
+                <a href="#">@item.CategoryName</a>
+                <ul>
+                @foreach (var subcategory in item.SubCategories)
+                {
+                    <li><a href="#">@subcategory.SubCategoryName</a></li>
+                }
+                </ul>
+
+            </li>
+        }else
+        {
+            <li><a href="#">@item.CategoryName</a></li> <!--1-->
+        }
+        
+    }
+    
+</ul>
+
+@* <ul>
+    <li><a asp-action="Services">Services</a></li>
+    <li class="drop-down">
+        <a href="">Projects</a>
+        <ul> <!-- starts here-->
+            <li><a href="#">Drop Down 1: category-without-subcategory</a></li> <!--1-->
+            <li class="drop-down">
+                <a href="#">Deep Drop Down</a>
+                <ul>
+                    <li><a href="#">Deep Drop Down 1</a></li>
+                    <li><a href="#">Deep Drop Down 2</a></li>
+                    <li><a href="#">Deep Drop Down 3</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Drop Down 2</a></li>
+            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="#">Drop Down 4</a></li>
+        </ul>
+    </li>
+    <li><a asp-action="Contact">Contact</a></li>
+    <li><a asp-area="Admin" asp-controller="Admin" asp-action="Index" target="_blank">Admin Area</a></li>
+
+</ul> *@

@@ -1,5 +1,7 @@
+return Redirect(Request.Headers["Referer"].ToString());
+----------------------------------------------------------
 Breadcrumb 
-
+----------------
 <main id="main">
 
         <!-- ======= Breadcrumbs Section ======= -->

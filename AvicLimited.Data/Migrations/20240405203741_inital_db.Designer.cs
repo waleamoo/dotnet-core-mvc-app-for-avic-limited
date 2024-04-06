@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AvicLimited.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240319093444_intital")]
-    partial class intital
+    [Migration("20240405203741_inital_db")]
+    partial class inital_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,9 +195,6 @@ namespace AvicLimited.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArtisanId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -217,7 +214,7 @@ namespace AvicLimited.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtisanId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategories");
                 });
@@ -359,7 +356,7 @@ namespace AvicLimited.Data.Migrations
                 {
                     b.HasOne("AvicLimited.Data.Models.Category", "Category")
                         .WithMany("SubCategories")
-                        .HasForeignKey("ArtisanId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

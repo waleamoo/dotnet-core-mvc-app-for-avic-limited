@@ -8,7 +8,7 @@ namespace AvicLimited.Data.Models
         public string SubCategoryDescription { get; set;} = string.Empty;
 
         public int CategoryId { get; set;}
-        [ForeignKey("ArtisanId")]
+        [ForeignKey("CategoryId")]
         public Category Category { get; set;}
     }
 }

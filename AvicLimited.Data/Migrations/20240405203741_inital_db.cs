@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AvicLimited.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class intital : Migration
+    public partial class inital_db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -217,7 +217,6 @@ namespace AvicLimited.Data.Migrations
                     SubCategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    ArtisanId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateModified = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -225,8 +224,8 @@ namespace AvicLimited.Data.Migrations
                 {
                     table.PrimaryKey("PK_SubCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubCategories_Categories_ArtisanId",
-                        column: x => x.ArtisanId,
+                        name: "FK_SubCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -272,9 +271,9 @@ namespace AvicLimited.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubCategories_ArtisanId",
+                name: "IX_SubCategories_CategoryId",
                 table: "SubCategories",
-                column: "ArtisanId");
+                column: "CategoryId");
         }
 
         /// <inheritdoc />

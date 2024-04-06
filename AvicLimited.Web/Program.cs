@@ -1,4 +1,6 @@
 using AvicLimited.Data.Models;
+using AvicLimited.Web.Repositories.Implementation;
+using AvicLimited.Web.Repositories.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +31,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
     options.User.RequireUniqueEmail = true; // requires unique email 
 }).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
+// inject repos
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+
 
 var app = builder.Build();
 
@@ -51,12 +58,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
-    );
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+
 
 app.Run();

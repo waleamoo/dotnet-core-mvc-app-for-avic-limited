@@ -1,0 +1,137 @@
+﻿@model CategoriesVM
+@inject AvicLimited.Web.Repositories.Interface.ICategoryRepository _catRepo
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<partial name="_header" />
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_sidebar" />
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Add Category & subcategory</li>
+            </ol>
+
+
+            <!-- The Rows -->
+            <div class="row">
+                <div class="col-md-12">
+                    <partial name="_notification" />
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Add Category
+                        </div>
+                        <div class="card-body">
+                            <form asp-area="Admin" asp-controller="Admin" asp-action="CategoryAdd" method="post">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <label asp-for="CategoryCreateVM.CategoryName"></label>
+                                    <input asp-for="CategoryCreateVM.CategoryName" name="CategoryName" class="form-control" />
+                                    <span asp-validation-for="CategoryCreateVM.CategoryName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CategoryCreateVM.CategoryDescription"></label>
+                                    <textarea asp-for="CategoryCreateVM.CategoryDescription" name="CategoryDescription" id="CategoryDescription" rows="10" cols="10" class="form-control"></textarea>
+                                    <span asp-validation-for="CategoryCreateVM.CategoryDescription" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Add Category</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Add Subcategory
+                        </div>
+                        <div class="card-body">
+                            <form asp-area="Admin" asp-controller="Admin" asp-action="SubcategoryAdd" method="post">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="SubcategoryCreateVM.CategoryId"></label>
+                                    <select asp-for="SubcategoryCreateVM.CategoryId" name="CategoryId" class="form-control" asp-items="(await _catRepo.GetCategories()).Select(x => new SelectListItem() { Text = x.CategoryName, Value = x.CategoryId.ToString()})">
+                                        <option>Please choose category</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="SubcategoryCreateVM.SubcategoryName"></label>
+                                    <input asp-for="SubcategoryCreateVM.SubcategoryName" name="SubcategoryName" class="form-control" />
+                                    <span asp-validation-for="SubcategoryCreateVM.SubcategoryName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="SubcategoryCreateVM.SubcategoryDescription"></label>
+                                    <textarea asp-for="SubcategoryCreateVM.SubcategoryDescription" name="SubcategoryDescription" rows="10" cols="10" class="form-control"></textarea>
+                                    <span asp-validation-for="SubcategoryCreateVM.SubcategoryDescription" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Add Subcategory</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- / The Rows -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <partial name="_footer" />
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="?action=index">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

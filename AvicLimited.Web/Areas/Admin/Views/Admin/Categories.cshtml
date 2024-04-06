@@ -1,0 +1,144 @@
+﻿@model IEnumerable<CategoryListVM>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<partial name="_header" />
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_sidebar" />
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">All Categories</li>
+            </ol>
+
+
+            <!-- The Rows -->
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            All Categories
+                        </div>
+                        <div class="card-body">
+                            @if(Model.Count() > 0)
+                            {
+                                <div class="table-responsive p-1">
+                                    <table class="table table-bordered table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.CategoryName)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.CategoryDescription)
+                                            </th>
+                                            <th>
+                                                Subcategory Name
+                                            </th>
+                                            <th>
+                                                Subcategory Description
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CategoryDescription)
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <a asp-area="Admin" asp-controller="Admin" asp-action="CategoryEdit"><i class="fa fa-fw fa-edit" title="Edit Category" aria-hidden="true"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a asp-area="Admin" asp-controller="Admin" asp-action="CategoryDelete"><i class="fa fa-fw fa-trash" title="Delete Category" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            @if (item.Subcategories.Count() > 0)
+                                            {
+                                                @for(int i = 0; i < item.Subcategories.Count(); i++)
+                                                {
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>@item.Subcategories[i].SubcategoryName</td>
+                                                        <td>@item.Subcategories[i].SubcategoryDescription</td>
+                                                        <td>
+                                                            <a asp-area="Admin" asp-controller="Admin" asp-action="SubcategoryEdit"><i class="fa fa-fw fa-edit" title="Edit Subcategory" aria-hidden="true"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a asp-area="Admin" asp-controller="Admin" asp-action="SubcategoryDelete"><i class="fa fa-fw fa-trash" title="Delete Subcategory" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>No categories</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / The Rows -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <partial name="_footer" />
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="?action=index">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
