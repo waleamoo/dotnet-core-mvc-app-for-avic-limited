@@ -1,0 +1,70 @@
+﻿@model IList<ProjectListVM>
+
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<main id="main">
+    <!-- ======= Why Us Section ======= -->
+    <section class="services" id="services">
+        <br /> <br /> <br />
+        <div class="container">
+            <div class="section-title">
+                <h2>Project</h2>
+                <p>
+                    @if (Model.Count() > 0)
+                    {
+                        <span>Based on your selection: </span>
+
+                        @if (@Model[0].CategoryName != null)
+                        {
+                            <b>@Model[0].CategoryName</b>
+                        }
+                        else if (@Model[0].SubcategoryName != null)
+                        {
+                            <b>@Model[0].SubcategoryName</b>
+                        }
+                    }
+
+                    .</p>
+            </div>
+
+            <div class="row">
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-12 mb-4">
+                            <div class="content mb-4">
+                                <h3><a asp-action="Project" asp-controller="Home" asp-route-id="@item.Id">@item.ProjectName</a></h3>
+                                @if (!string.IsNullOrEmpty(item.ProjectDescription) && item.ProjectDescription.Length > 200)
+                                {
+                                    <span>@Html.Raw(item.ProjectDescription.Substring(0, 200))</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.Raw(item.ProjectDescription)</span>
+                                }
+
+                            </div>
+                        </div>
+                    }
+
+                    @if (ViewBag.TotalPages > 1)
+                    {
+                        <div class="d-flex w-100 justify-content-center">
+                            <pagination page-count="@ViewBag.TotalPages" page-target="/projects/@ViewBag.PageNumber/@ViewBag.CategoryId/@ViewBag.SubCategoryId" page-number="@ViewBag.PageNumber" page-range="@ViewBag.PageRange"></pagination>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p syle="margin-bottom:500px;">No projects</p>
+                }
+                
+            </div>
+
+        </div>
+    </section>
+    
+</main>

@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\js\" />
+    <Folder Include="wwwroot\project\gallery\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

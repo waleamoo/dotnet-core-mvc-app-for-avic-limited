@@ -1,6 +1,7 @@
 ﻿using AvicLimited.Data.Models;
 using AvicLimited.Web.Models;
 using AvicLimited.Web.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace AvicLimited.Web.Repositories.Implementation
 {
@@ -27,5 +28,9 @@ namespace AvicLimited.Web.Repositories.Implementation
             return true;
         }
 
+        public async Task<List<SubCategory>> GetSubCategoriesByCategoryId(int categoryId)
+        {
+            return await _context.SubCategories.Where(x => x.CategoryId == categoryId).ToListAsync(); 
+        }
     }
 }

@@ -43,10 +43,12 @@ namespace AvicLimited.Web.Repositories.Implementation
             var categories =  await _context.Categories.Include(x => x.SubCategories).ToListAsync();
             return categories.Select(x => new CategoryListVM
             {
+                Id = x.Id,
                 CategoryName = x.CategoryName,
                 CategoryDescription = x.CategoryDescription,
                 Subcategories = x.SubCategories.Select(c => new SubcategoryListVM
                 {
+                    Id = c.Id,
                     SubcategoryName = c.SubCategoryName,
                     SubcategoryDescription = c.SubCategoryDescription
                 }).ToList()

@@ -6,18 +6,18 @@
         @if (item.SubCategories.Any())
         {
             <li class="drop-down">
-                <a href="#">@item.CategoryName</a>
+                <a asp-action="Projects" asp-controller="Home" asp-route-p="1" asp-route-categoryId="@item.Id" asp-route-subCategoryId="0">@item.CategoryName</a>
                 <ul>
                 @foreach (var subcategory in item.SubCategories)
                 {
-                    <li><a href="#">@subcategory.SubCategoryName</a></li>
+                    <li><a asp-action="Projects" asp-controller="Home" asp-route-p="1" asp-route-categoryId="0" asp-route-subCategoryId="@subcategory.Id">@subcategory.SubCategoryName</a></li>
                 }
                 </ul>
 
             </li>
         }else
         {
-            <li><a href="#">@item.CategoryName</a></li> <!--1-->
+            <li><a asp-action="Projects" asp-controller="Home" asp-route-p="1" asp-route-categoryId="@item.Id" asp-route-subCategoryId="0">@item.CategoryName</a></li>
         }
         
     }

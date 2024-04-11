@@ -1,0 +1,61 @@
+﻿@model ProjectListVM
+
+@{
+    ViewData["Title"] = "Project";
+}
+
+<main id="main">
+    <!-- ======= Why Us Section ======= -->
+    <section class="services" id="services">
+        <br /> <br /> <br />
+        <div class="container">
+            <div class="section-title">
+                <h2>@Model.ProjectName</h2>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-lg-12 mb-4">
+                    <div class="content mb-4">
+                        <h3>@Model.ProjectName</h3>
+                        <span>@Html.Raw(@Model.ProjectDescription)</span>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    @if (Model.ProjectImages.Any())
+    {
+        <section id="gallery" class="gallery">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Project Gallery</h2>
+                    <p>Here are pictures from the project</p>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row no-gutters">
+
+                    @for (int i = 0; i < Model.ProjectImages.Count(); i++)
+                    {
+
+                        <div class="col-lg-3 col-md-4">
+                            <div class="gallery-item">
+                                <a href="@Model.ProjectImages[i].ProjectImageUrl" class="venobox" data-gall="gallery-item">
+                                    <img src="@Model.ProjectImages[i].ProjectImageUrl" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </section>
+    }
+    
+</main>

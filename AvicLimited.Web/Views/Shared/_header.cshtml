@@ -1,4 +1,4 @@
-﻿<!-- ======= Header ======= -->
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<AppUser> _signInManager
 
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -16,9 +16,20 @@
                     @await Component.InvokeAsync("Categories")
                 </li>
                 <li><a asp-action="Contact">Contact</a></li>
-                <li><a asp-area="Admin" asp-controller="Admin" asp-action="Index" target="_blank">Admin Area</a></li>
-
+                @if (_signInManager.IsSignedIn(User))
+                {
+                    <li class="drop-down">
+                        <a href="#">@(User.FindFirst("ClientFirstname").Value.ToString() + " " + User.FindFirst("ClientLastname").Value.ToString())</a>
+                        <ul>
+                            <li><a asp-area="Admin" asp-controller="Admin" asp-action="Index" target="_blank">Admin Area</a></li>
+                            <li><a asp-controller="Home" asp-action="ChangePassword">Change Password</a></li>
+                            <li><a asp-controller="Home" asp-action="Logout">Logout</a></li>
+                        </ul>
+                    </li>
+                }
             </ul>
         </nav>
     </div>
 </header>
+
+

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ContactAddVM
+
+@{
     ViewData["Title"] = "Contact";
 }
 
@@ -9,7 +11,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Contact</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <p>Do you need to reach us? We are available 24/7 at the details and location below.</p>
             </div>
         </div>
 
@@ -25,19 +27,21 @@
                         <div class="address">
                             <i class="icofont-google-map"></i>
                             <h4>Location:</h4>
-                            <p>A108 Adam Street, New York, NY 535022</p>
+                            <p>
+                                9C Omego crescent, Lekki Phase 1, Lagos
+                            </p>
                         </div>
 
                         <div class="email">
                             <i class="icofont-envelope"></i>
                             <h4>Email:</h4>
-                            <p>info@example.com</p>
+                            <p>info@aviclimited.com</p>
                         </div>
 
                         <div class="phone">
                             <i class="icofont-phone"></i>
                             <h4>Call:</h4>
-                            <p>+1 5589 55488 55s</p>
+                            <p> +234 706 275 0818</p>
                         </div>
 
                     </div>
@@ -45,32 +49,35 @@
                 </div>
 
                 <div class="col-lg-8 mt-5 mt-lg-0">
+                    <partial name="_notification" />
+                    <form method="post" asp-action="Contact" asp-controller="Home">
 
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validate"></div>
+                                <input asp-for="ContactName" class="form-control" placeholder="Your Name" />
+                                <span asp-validation-for="ContactName" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                <div class="validate"></div>
+                                <input asp-for="ContactEmail" class="form-control" placeholder="Your Email" />
+                                <span asp-validation-for="ContactEmail" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validate"></div>
+                            <input asp-for="ContactSubject" class="form-control" placeholder="Subject" />
+                            <span asp-validation-for="ContactSubject" class="text-danger"></span>
+
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                            <div class="validate"></div>
+                            <textarea class="form-control" rows="5" asp-for="ContactMessage" placeholder="Message"></textarea>
+                            <span asp-validation-for="ContactMessage" class="text-danger"></span>
+
                         </div>
-                        <div class="mb-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
+                        
+                        <div class="text-center"><button type="submit" class="appointment-btn">Send Message</button></div>
+
                     </form>
 
                 </div>

@@ -1,5 +1,8 @@
-﻿namespace AvicLimited.Data.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace AvicLimited.Data.Models
 {
+    [Index(nameof(CategoryName))]
     public class Category : BaseEntity
     {
         public string CategoryName { get; set; } = string.Empty;

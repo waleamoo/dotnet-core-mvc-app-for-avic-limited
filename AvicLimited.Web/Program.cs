@@ -1,6 +1,8 @@
 using AvicLimited.Data.Models;
+using AvicLimited.Web.Infrastructure;
 using AvicLimited.Web.Repositories.Implementation;
 using AvicLimited.Web.Repositories.Interface;
+using AvicLimited.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +37,18 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+// services
+builder.Services.AddScoped<IUserService, UserService>();
+// redirect authorized request 
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = builder.Configuration["Application:LoginPath"];
+});
+
+// claims factory - for the header to display the name and last name of the authenticated user 
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, AppUserClaimsPrincipalFactory>();
 
 
 var app = builder.Build();
@@ -67,6 +81,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-
+app.MapControllerRoute(
+    name: "searchProjectByCategory",
+    pattern: "{controller=Home}/{action=Index}/{p}/{categoryId?}/{subCategoryId?}"
+);
 
 app.Run();

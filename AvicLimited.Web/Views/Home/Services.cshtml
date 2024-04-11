@@ -1,4 +1,5 @@
 ﻿@model IList<CategoryListVM>
+@inject AvicLimited.Web.Repositories.Interface.ICategoryRepository _catRepo
 
 @{
     ViewData["Title"] = "Services";
@@ -23,7 +24,7 @@
                         <div class="content">
                             <h3>@item.CategoryName</h3>
                             <p>
-                                @item.CategoryDescription
+                                @Html.Raw(item.CategoryDescription)
                             </p>
                             @if (item.Subcategories.Any())
                             {
@@ -57,54 +58,43 @@
                 </p>
             </div>
 
-            <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+            <form asp-action="QuoteAdd" asp-asp-controller="Home" method="post">
+
                 <div class="form-row">
                     <div class="col-md-4 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" class="form-control" id="QuoteName" name="QuoteName" required placeholder="Your Name">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <input type="email" class="form-control" name="QuoteEmail" id="QuoteEmail" required placeholder="Your Email">
                     </div>
                     <div class="col-md-4 form-group">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="tel" class="form-control" name="QuotePhone" id="QuotePhone" required placeholder="Your Phone Number">
                     </div>
                 </div>
                 <div class="form-row">
+
                     <div class="col-md-4 form-group">
-                        <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <select name="department" id="department" class="form-control">
-                            <option value="">Select Project Type</option>
-                            <option value="Department 1">Department 1</option>
-                            <option value="Department 2">Department 2</option>
-                            <option value="Department 3">Department 3</option>
+                        <select name="CategoryId" id="CategoryId" required class="form-control" asp-items="(await _catRepo.GetCategories()).Select(x => new SelectListItem() { Text = x.CategoryName, Value = x.CategoryId.ToString()})">
+                            <option>Please choose category</option>
                         </select>
-                        <div class="validate"></div>
                     </div>
+
                     <div class="col-md-4 form-group">
-                        <input type="text" name="name" class="form-control" id="budget" placeholder="Budget " data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" class="form-control" name="QuoteBudget" id="QuoteBudget" required placeholder="Budget">
                     </div>
+
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-                    <div class="validate"></div>
+                    <textarea class="form-control" name="QuoteMessage" id="QuoteMessage" rows="5" placeholder="Message (Optional)"></textarea>
                 </div>
-                <div class="mb-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit">Submit Quote</button></div>
+                
+                <div class="text-center"><button type="submit" class="appointment-btn">Submit Quote</button></div>
             </form>
 
         </div>
-    </section><!-- End Appointment Section -->
-
+    </section>
+    <!-- End Appointment Section -->
+    
 </main>

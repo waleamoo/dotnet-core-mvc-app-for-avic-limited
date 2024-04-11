@@ -101,6 +101,48 @@ namespace AvicLimited.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "408aa945-3d84-4421-8342-7269ec64d949",
+                            AccessFailedCount = 0,
+                            ClientAddress = "Unknown",
+                            ClientCompany = "Avic Limited",
+                            ClientFirstname = "Admin",
+                            ClientLastname = "Admin",
+                            ConcurrencyStamp = "49cc181d-0821-4335-bc53-e043ba266159",
+                            Email = "info@aviclimited.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "INFO@AVICLIMITED.COM",
+                            NormalizedUserName = "INFO@AVICLIMITED.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECyPo/psvtBBvxE5azBfMCLy7MJzRoa4dzAwOqyHymH7BF+37pj3Rz6oXhjOXvQryw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2175baab-8230-4bb9-a0d8-26242f372721",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "3f4631bd-f907-4409-b416-ba356312e659",
+                            AccessFailedCount = 0,
+                            ClientAddress = "Unknown",
+                            ClientCompany = "Avic Limited",
+                            ClientFirstname = "User",
+                            ClientLastname = "User",
+                            ConcurrencyStamp = "f7f08aef-0e8f-4eef-9184-fed3d2d70852",
+                            Email = "user@aviclimited.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@AVICLIMITED.COM",
+                            NormalizedUserName = "USER@AVICLIMITED.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDToK2toU1MyzZvjRv8E0y096TNWvqCfKUtGbiT9rzlX5MGtEqd8RakzMAW4U0aF4w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9a1ab62b-10aa-49ae-8cc1-25eb43a69323",
+                            TwoFactorEnabled = false,
+                            UserName = "user@localhost.com"
+                        });
                 });
 
             modelBuilder.Entity("AvicLimited.Data.Models.Category", b =>
@@ -117,6 +159,43 @@ namespace AvicLimited.Data.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryName");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("AvicLimited.Data.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactSubject")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -127,7 +206,7 @@ namespace AvicLimited.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("AvicLimited.Data.Models.Project", b =>
@@ -137,6 +216,9 @@ namespace AvicLimited.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -150,9 +232,18 @@ namespace AvicLimited.Data.Migrations
 
                     b.Property<string>("ProjectName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProjectName");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Projects");
                 });
@@ -171,6 +262,9 @@ namespace AvicLimited.Data.Migrations
                     b.Property<DateTime>("DateModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ProjectImageDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -181,7 +275,49 @@ namespace AvicLimited.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("ProjectImages");
+                });
+
+            modelBuilder.Entity("AvicLimited.Data.Models.Quote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("QuoteBudget")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuoteEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuoteMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuoteName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuotePhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("AvicLimited.Data.Models.SubCategory", b =>
@@ -241,6 +377,20 @@ namespace AvicLimited.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "cac43a7e-f7cb-4148-baaf-1acb431eabbf",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -328,6 +478,18 @@ namespace AvicLimited.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "408aa945-3d84-4421-8342-7269ec64d949",
+                            RoleId = "cac43a6e-f7bb-4448-baaf-1add431ccbbf"
+                        },
+                        new
+                        {
+                            UserId = "3f4631bd-f907-4409-b416-ba356312e659",
+                            RoleId = "cac43a7e-f7cb-4148-baaf-1acb431eabbf"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -349,12 +511,40 @@ namespace AvicLimited.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AvicLimited.Data.Models.Project", b =>
+                {
+                    b.HasOne("AvicLimited.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AvicLimited.Data.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("AvicLimited.Data.Models.ProjectImage", b =>
+                {
+                    b.HasOne("AvicLimited.Data.Models.Project", "Project")
+                        .WithMany("ProjectImages")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("AvicLimited.Data.Models.SubCategory", b =>
                 {
                     b.HasOne("AvicLimited.Data.Models.Category", "Category")
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -414,6 +604,11 @@ namespace AvicLimited.Data.Migrations
             modelBuilder.Entity("AvicLimited.Data.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("AvicLimited.Data.Models.Project", b =>
+                {
+                    b.Navigation("ProjectImages");
                 });
 #pragma warning restore 612, 618
         }

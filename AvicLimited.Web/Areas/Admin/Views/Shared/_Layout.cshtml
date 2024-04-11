@@ -83,13 +83,6 @@
     <script src="~/assets/vendor/js/main.js"></script>
     <script src="~/assets/vendor/js/jquery.inputmask.min.js"></script>
     <script src="~/assets/vendor/js/inputmask.min.js"></script>
-
-    <script>
-        function numbersOnly(input) {
-            var regex = /[^0-9]/g;
-            input.value = input.value.replace(regex, "");
-        }
-    </script>
     <script src="~/assets/vendor/ckeditor/ckeditor.js"></script>
     <script>
         $(function () {
@@ -98,7 +91,35 @@
                 //filebrowserUploadMethod: "form",
                 filebrowserBrowseUrl: "/home/uploadexplorer"
             });
-        })
+
+            CKEDITOR.replace('SubcategoryDescription', {
+                filebrowserUploadUrl: "/home/uploadimage",
+                //filebrowserUploadMethod: "form",
+                filebrowserBrowseUrl: "/home/uploadexplorer"
+            });
+
+            CKEDITOR.replace('ProjectDescription', {
+                filebrowserUploadUrl: "/home/uploadimage",
+                //filebrowserUploadMethod: "form",
+                filebrowserBrowseUrl: "/home/uploadexplorer"
+            });
+
+            // images upload preview
+            $("#GalleryFiles").change(function () {
+                $("#projectImages").empty();
+                for (let i = 0; i < this.files.length; ++i) {
+                    let fileReader = new FileReader();
+                    let $img = jQuery.parseHTML("<img src='' width='200' height='200'>");
+                    fileReader.onload = function () {
+                        $img[0].src = this.result;
+                    };
+                    fileReader.readAsDataURL(this.files[i]);
+                    $("#projectImages").append($img);
+                }
+            });
+
+        });
+
     </script>
 </body>
 

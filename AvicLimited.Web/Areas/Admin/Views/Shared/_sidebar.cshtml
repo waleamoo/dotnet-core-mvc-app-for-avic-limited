@@ -18,6 +18,13 @@
             <span>Projects</span>
         </a>
     </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="ProjectAdd">
+            <i class="fa fa-fw fa-plus" aria-hidden="true"></i>
+            <span>Add Project</span>
+        </a>
+    </li>
     
     <li class="nav-item active">
         <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="Categories">
@@ -56,9 +63,9 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="/home/client">
+        <a class="nav-link" asp-area="Admin" asp-controller="Roles" asp-action="Index">
             <i class="fas fa-fw fa-user"></i>
-            <span>Clients</span>
+            <span>Roles</span>
         </a>
     </li>
 
@@ -81,7 +88,7 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="/home/logout-admin">
+        <a class="nav-link" asp-controller="Home" asp-action="Logout">
             <i class="fas fa-fw fa-search"></i>
             <span>Logout</span>
         </a>

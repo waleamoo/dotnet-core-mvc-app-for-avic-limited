@@ -4,7 +4,9 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> @TempData["success"]. <br />
         @* Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the book details *@
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
@@ -13,7 +15,9 @@
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> @TempData["error"]. <br />
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
@@ -23,7 +27,9 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> @TempData["category-success"]. <br />
         Click <a asp-area="Admin" asp-controller="Admin" asp-action="Categories">here</a> to view the category details
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
@@ -32,7 +38,9 @@
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> @TempData["category-error"]. <br />
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
@@ -42,16 +50,39 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> @TempData["subcategory-success"]. <br />
         Click <a asp-area="Admin" asp-controller="Admin" asp-action="Categories">here</a> to view the subcategory details
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 
 @if (TempData["subcategory-error"] != null)
 {
-
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> @TempData["subcategory-error"]. <br />
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["project-error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["project-error"]. <br />
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["project-success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> @TempData["project-success"]. <br />
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 }
 

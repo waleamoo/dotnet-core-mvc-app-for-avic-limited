@@ -1,0 +1,127 @@
+﻿@model ProjectAddVM
+@inject AvicLimited.Web.Repositories.Interface.ICategoryRepository _catRepo
+
+@{
+    ViewData["Title"] = "Add Project";
+}
+
+<partial name="_header" />
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_sidebar" />
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Add Project</li>
+            </ol>
+
+
+            <!-- The Rows -->
+            <div class="row">
+                <div class="col-md-12">
+                    <partial name="_notification" />
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Add Project
+                        </div>
+                        <div class="card-body">
+                            <form asp-area="Admin" asp-controller="Admin" asp-action="ProjectAdd" enctype="multipart/form-data" method="post">
+
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <label asp-for="ProjectName"></label>
+                                    <input asp-for="ProjectName" class="form-control" placeholder="Project Name (e.g. Construction work at Lekki)" />
+                                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="CategoryId"></label>
+                                    <select asp-for="CategoryId" class="form-control" asp-items="(await _catRepo.GetCategories()).Select(x => new SelectListItem() { Text = x.CategoryName, Value = x.CategoryId.ToString()})">
+                                        <option>Please choose category</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="SubCategoryId"></label>
+                                    <select asp-for="SubCategoryId" class="form-control">
+                                        <option selected value='0'>Please choose subcategory</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="ProjectDescription"></label>
+                                    <textarea asp-for="ProjectDescription" rows="10" cols="10" class="form-control"></textarea>
+                                    <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input asp-for="GalleryFiles" class="custom-file-input" />
+                                        <label class="custom-file-label" asp-for="GalleryFiles">Choose project image files</label>
+                                    </div>
+                                    <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+                                </div>
+
+                                <div id="projectImages"></div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Add Project</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- / The Rows -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <partial name="_footer" />
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="?action=index">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

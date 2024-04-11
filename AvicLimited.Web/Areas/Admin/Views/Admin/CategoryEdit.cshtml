@@ -1,0 +1,107 @@
+﻿@model CategoryEditVM
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<partial name="_header" />
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <partial name="_sidebar" />
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Edit Category</li>
+            </ol>
+
+
+            <!-- The Rows -->
+            <div class="row">
+                <div class="col-md-12">
+                    <partial name="_notification" />
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Edit Category
+                        </div>
+                        <div class="card-body">
+                            <form asp-area="Admin" asp-controller="Admin" asp-action="CategoryEdit" method="post">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <input type="hidden" asp-for="Id" />
+
+
+                                <div class="form-group">
+                                    <label asp-for="CategoryName"></label>
+                                    <input asp-for="CategoryName" class="form-control" />
+                                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="CategoryDescription"></label>
+                                    <textarea asp-for="CategoryDescription" rows="10" cols="10" class="form-control"></textarea>
+                                    <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Edit Category</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- / The Rows -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <partial name="_footer" />
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="?action=index">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
